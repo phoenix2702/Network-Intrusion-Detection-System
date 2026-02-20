@@ -1,0 +1,294 @@
+    /* General Reset and Styling */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body, html {
+        height: 100%;
+        font-family: 'Arial', sans-serif;
+        background:  #1f2937;
+        color: #f6f3f3;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+    }
+    h1{
+        text-align: center;
+        margin-top: 10pc;
+    }
+
+    /* Container for the whole page */
+    .page-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 
+            "header"
+            "main";
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Header */
+    header {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    /* Main Section Layout */
+    .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .content-container {
+        background: rgb(1, 1, 44);
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 700px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeIn 1s ease-out;
+        position: relative;
+        overflow: hidden; /* Ensure that the envelope stays inside the container */
+    }
+
+    .content-container:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Header within content */
+    .content-container h2 {
+        color: #d8dbdf;
+        font-size: 2.2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Buttons */
+    button {
+        padding: 14px 24px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 8px;
+        border: none;
+        margin: 10px;
+        transition: all 0.3s ease;
+        display: inline-block;
+        cursor: pointer;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    /* Start Capture Button */
+    #startCapture {
+        background-color: #28a745;
+        color: white;
+    }
+
+    #startCapture:hover {
+        background-color: #218838;
+        box-shadow: 0 8px 16px rgba(40, 167, 69, 0.3);
+    }
+
+    /* Stop Capture Button */
+    #stopCapture {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    #stopCapture:hover {
+        background-color: #c82333;
+        box-shadow: 0 8px 16px rgba(220, 53, 69, 0.3);
+    }
+
+    /* Pulse Animation on Button Click */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /* Spinner for Loading State */
+    #loadingSpinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f4f6;
+        border-top: 5px solid #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        display: none;
+        margin-top: 20px;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Status message */
+    #statusMessage {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f5f7f9;
+    }
+
+    #statusIcon {
+        font-size: 1.5rem;
+        margin-right: 10px;
+    }
+
+    /* Capture Timer */
+    #captureTimer {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #17a2b8;
+        margin-top: 20px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button Hover Animation */
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Success Animation After Click */
+    #startCapture.success {
+        animation: pulse 0.6s ease-out;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .main-container {
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .content-container {
+            padding: 30px;
+        }
+
+        button {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        #captureTimer {
+            font-size: 1rem;
+        }
+    }
+
+    /* Envelope Animation */
+    @keyframes flyEnvelope {
+        0% {
+            transform: translateX(-5vw); /* Start completely outside from left */
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(80vw); /* Move completely outside from right */
+            opacity: 0;
+        }
+    }
+
+    /* Envelope Styling with Image */
+    .envelope {
+        position: absolute;
+        top: 80%; /* Align vertically to the center */
+        left: 0;
+        width: 70px;
+        height: 40px;
+        background-image: url('/static/images.jpg'); /* Corrected URL path */
+        background-size: cover; /* Ensure the image fits the container */
+        border-radius: 5px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+        opacity: 0; /* Start invisible */
+        transition: transform 1s ease-in-out; /* Smooth animation transitions */
+    }
+
+
+    /* Envelope Flying Effect */
+    .envelope.fly {
+        animation: flyEnvelope 5s linear infinite; /* Slow down flying speed */
+    }
+
+    /* Staggered Animations */
+    .envelope:nth-child(1) {
+        animation-delay: 1s;
+    }
+    .envelope:nth-child(2) {
+        animation-delay: 3s;
+    }
+    .envelope:nth-child(3) {
+        animation-delay: 5s;
+    }
+    .envelope:nth-child(4) {
+        animation-delay: 7s;
+    }
+
+    /* Envelope Capture Animation */
+    @keyframes captureEnvelope {
+        0% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        50% {
+            opacity: 0.7;
+            transform: scale(0.8) translateY(-50px);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0.5) translateY(0);
+        }
+    }
+
+    .envelope.capture {
+        animation: captureEnvelope 1s ease-out forwards;
+    }

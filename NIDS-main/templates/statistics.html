@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/statistics.css">
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="content-container">
+            <h1 class="text-center">Alert Statistics</h1>
+            
+            <!-- Button to fetch alerts file and generate statistics -->
+            <div class="text-center mb-3">
+                <button class="btn btn-primary" id="generateStatsBtn">
+                    <i class="fas fa-chart-bar"></i> Generate Statistics
+                </button>
+            </div>
+            
+            <!-- Message area for status -->
+            <div id="statusMessage" class="status-message text-center"></div>
+            
+            <!-- Display charts -->
+            <div id="chart-section" class="chart-container" style="display: none;">
+                <h2>Protocol Distribution</h2>
+                <img src="static/protocol_distribution.png" alt="Protocol Distribution">
+                
+                <h2>Alert Type Counts</h2>
+                <img src="static/alert_type_counts.png" alt="Alert Type Counts">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateStatsBtn').addEventListener('click', function() {
+            // Show the loading message
+            document.getElementById('statusMessage').innerText = 'Generating statistics...';
+
+            // Fetch the alert data and generate statistics
+            fetch('/generate_statistics', { method: 'GET' })
+                .then(response => {
+                    // Check if the response is not JSON (e.g., an error page was returned)
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json(); // Parse the JSON response
+                })
+                .then(data => {
+                    if (data.status === "Statistics generated successfully!") {
+                        document.getElementById('statusMessage').innerText = 'Statistics generated successfully!';
+                        document.getElementById('chart-section').style.display = 'block'; // Show charts
+                    } else {
+                        document.getElementById('statusMessage').innerText = 'Error generating statistics: ' + data.error;
+                    }
+                })
+                .catch(error => {
+                    // Log the error response to understand what's going wrong
+                    console.error("Error:", error);
+                    document.getElementById('statusMessage').innerText = 'Failed to generate statistics: ' + error.message;
+                });
+        });
+    </script>
+</body>
+</html>

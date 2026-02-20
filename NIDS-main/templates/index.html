@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaGuard Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    {% include 'nav.html' %}
+
+<!-- Main Content -->
+<div class="container text-center mt-5">
+    <h1>Catch Threats Before They Strike!</h1>
+</div>
+
+<!-- Card Slider with Full Background -->
+<div class="card-slider-background">
+    <div class="card-slider">
+        <!-- Navigation Buttons -->
+        <button class="btn btn-primary" id="prevBtn" aria-label="Previous">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="card-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-network-wired"></i>
+                        "Unleash Real-Time Network Insights—Powerful, Intuitive, Instant!"
+                    </h5>
+                    <p class="card-text">
+                        Step into the future of network monitoring! Our Packet Capture Page gives you live, actionable insights with just a click. Featuring real-time packet counts, detailed session summaries, and intuitive progress bars, this tool is crafted to make complex data feel simple. With robust error handling, responsive design, and downloadable reports, network analysis has never been this accessible. Perfect for security teams, IT pros, and analysts ready to see every detail in real time—monitor smarter, secure faster, and transform your network insights in an instant!
+                    </p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-shield-alt"></i>
+                        "Stay Alert, Stay Secure—Real-Time Network Threat Detection!"
+                    </h5>
+                    <p class="card-text">
+                        Our Alerts Page is your command center for network security! Instantly view, filter, and analyze real-time alerts with a clear, organized display that highlights potential threats the moment they appear. Built for efficiency and precision, this page is essential for anyone focused on keeping networks safe, spotting unusual activity, and responding to incidents without delay. See the alerts, act on insights, and secure your network—all from one powerful dashboard!
+                    </p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-brain"></i>
+                        "ML-Powered Predictions for Smarter, Proactive Network Defense!"
+                    </h5>
+                    <p class="card-text">
+                        Our Input Predictions Page puts advanced AI directly in your hands, turning traffic data into actionable security insights. Simply input data, and watch as our algorithms analyze, predict, and flag potential threats in real time. With predictive insights that identify anomalies before they become incidents, this page enables security teams to shift from reactive to proactive, staying one step ahead of potential risks. Built for those who value foresight, this tool ensures that every action is guided by data—predict, prevent, and protect your network with confidence!
+                    </p>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-chart-bar"></i>
+                        "Uncover Insights with Powerful Network Statistics!"
+                    </h5>
+                    <p class="card-text">
+                        Our Statistics Page delivers an in-depth view of your network’s health and activity. Dive into detailed metrics, visualize traffic patterns, and analyze historical data—all in one easy-to-navigate dashboard. Designed to make complex data accessible, this page gives IT teams and analysts a clear picture of trends, peaks, and anomalies, empowering data-driven decisions to optimize and secure network performance. Track, analyze, and stay informed like never before!
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" id="nextBtn" aria-label="Next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+let currentIndex = 0;
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+    const cards = document.querySelectorAll('.card');
+    const totalCards = cards.length;
+    const cardWidth = cards[0].clientWidth + 20; // Width of card + margin
+
+    if (currentIndex < totalCards - 1) {
+        currentIndex++;
+        document.querySelector('.card-container').style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+    }
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        const cardWidth = document.querySelector('.card').clientWidth + 20; // Width of card + margin
+        document.querySelector('.card-container').style.transform = `translateX(-${cardWidth * currentIndex}px)`;
+    }
+});
+</script>
+</body>
+</html>

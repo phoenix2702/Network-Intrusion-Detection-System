@@ -1,0 +1,149 @@
+/* Root Variables for Colors and Theme */
+:root {
+    --primary-bg: #1f2937; /* Dark Gray Background */
+    --secondary-bg: #2d3748; /* Lighter Dark Background */
+    --card-bg: #2c3340; /* Card Background */
+    --text-primary: #e2e8f0; /* Light Text */
+    --text-secondary: #a0aec0; /* Muted Text */
+    --accent-color: #4299e1; /* Bright Blue for Accents */
+    --success-color: #48bb78; /* Green for Success Buttons */
+    --border-color: #4a5568; /* Border Color */
+    --hover-color: rgba(66, 153, 225, 0.2); /* Hover Effect */
+}
+
+/* General Styles */
+body {
+    background: var(--primary-bg);
+    font-family: 'Roboto', Arial, sans-serif;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Container Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+/* Card Styles */
+.card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* Button Styles */
+button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background: rgba(66, 153, 225, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(66, 153, 225, 0.5);
+}
+
+.btn-success {
+    background: var(--success-color);
+    color: var(--text-primary);
+}
+
+.btn-success:hover {
+    background: rgba(72, 187, 120, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(72, 187, 120, 0.5);
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table th {
+    background: var(--secondary-bg);
+    color: var(--text-primary);
+}
+
+.table tr:nth-child(odd) {
+    background: var(--card-bg);
+}
+
+.table tr:nth-child(even) {
+    background: var(--secondary-bg);
+}
+
+.table tr:hover {
+    background: var(--hover-color);
+    color: var(--text-primary);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: 10px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}

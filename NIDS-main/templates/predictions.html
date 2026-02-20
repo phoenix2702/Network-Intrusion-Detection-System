@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/predictions.css"> <!-- Link to the external CSS -->
+</head>
+<body>
+    {% include 'nav.html' %}
+    <div class="container">
+        <h2 class="text-center mb-4">Network Traffic Predictions</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <p>Upload your network traffic dataset in Excel format (<code>.xlsx</code>). The system will analyze the dataset and provide predictions.</p>
+                <!-- Form now posts to the /predict route -->
+                <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Upload File</label>
+                        <input class="form-control" type="file" id="file" name="file" accept=".xlsx" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Analyze Data</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Success message or prediction link section -->
+        {% if predictions_file %}
+        <div class="card mt-4">
+            <div class="card-body">
+                <p>Once the analysis is complete, you can download the results below:</p>
+                <!-- Dynamic download link based on the successful file generation -->
+                <a href="{{ url_for('static', filename='uploads/' + predictions_file) }}" class="btn btn-success w-100" download>Download Predictions</a>
+            </div>
+        </div>
+        {% elif error %}
+        <div class="alert alert-danger mt-4">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        &copy; 2024 Network Intrusion Detection System
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

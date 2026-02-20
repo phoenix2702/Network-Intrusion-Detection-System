@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/alert.css">
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="content-container">
+            <h5>Fetch Alerts</h5>
+            <div class="text-center mb-3">
+                <button class="btn btn-primary" onclick="fetchAlerts()">Fetch Alerts</button>
+                <button class="btn btn-success" onclick="exportAlerts()">Export to Excel</button> <!-- New Export Button -->
+            </div>
+            <div id="alerts-text" class="text-center mb-3"></div>
+            <table class="table table-striped alert-table mt-4">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Source IP</th>
+                        <th>Destination IP</th>
+                        <th>Protocol</th>
+                        <th>Type</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="alerts-table-body">
+                    <!-- Alerts will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function fetchAlerts() {
+            fetch('/fetch_alerts')
+                .then(response => response.json())
+                .then(data => {
+                    const alertsTableBody = document.getElementById('alerts-table-body');
+                    alertsTableBody.innerHTML = ''; // Clear previous alerts
+                    if (data.error) {
+                        document.getElementById('alerts-text').textContent = 'Error fetching alerts: ' + data.error;
+                    } else {
+                        data.alerts.forEach(alert => {
+                            const row = `<tr>
+                                <td>${alert.timestamp}</td>
+                                <td>${alert.src_ip}</td>
+                                <td>${alert.dest_ip}</td>
+                                <td>${alert.protocol}</td>
+                                <td>${alert.type}</td>
+                                <td>${alert.message}</td>
+                            </tr>`;
+                            alertsTableBody.innerHTML += row;
+                        });
+                    }
+                })
+                .catch(error => console.error('Error fetching alerts:', error));
+        }
+
+        function exportAlerts() {
+            window.location.href = '/export_alerts'; // Trigger the download
+        }
+    </script>
+</body>
+</html>

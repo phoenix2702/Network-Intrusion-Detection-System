@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snort Alerts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static\style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Snort Alerts</h1>
+
+        <!-- Buttons to start, stop, and fetch alerts -->
+        <button id="startCapture" class="btn btn-success" onclick="startCapture()">Start Capture</button>
+        <button id="stopCapture" class="btn btn-danger" onclick="stopCapture()">Stop Capture</button>
+        <button id="fetchAlerts" class="btn btn-info" onclick="fetchAlerts()">Fetch Alerts</button>
+
+        <!-- Display status text -->
+        <div id="status-text" style="margin-top: 10px;"></div>
+
+        <!-- Table to display alerts -->
+        <div id="alertTable" style="margin-top: 20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Source IP</th>
+                        <th>Destination IP</th>
+                        <th>Protocol</th>
+                        <th>Type</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="alertsBody">
+                    <!-- Alerts will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to start capturing
+        function startCapture() {
+            fetch('/start_capture', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status-text').textContent = data.status;
+                })
+                .catch(error => console.error('Error starting capture:', error));
+        }
+
+        // Function to stop capturing
+        function stopCapture() {
+            fetch('/stop_capture', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status-text').textContent = data.status;
+                })
+                .catch(error => console.error('Error stopping capture:', error));
+        }
+
+        // Function to fetch alerts and display them in a table
+        function fetchAlerts() {
+            fetch('/fetch_alerts')
+                .then(response => response.json())
+                .then(data => {
+                    const alertsBody = document.getElementById('alertsBody');
+                    alertsBody.innerHTML = ''; // Clear previous alerts
+
+                    if (data.error) {
+                        alertsBody.innerHTML = '<tr><td colspan="6">Error fetching alerts: ' + data.error + '</td></tr>';
+                    } else if (data.alerts && data.alerts.length > 0) {
+                        data.alerts.forEach(alert => {
+                            const row = `
+                                <tr>
+                                    <td>${alert.timestamp || 'N/A'}</td>
+                                    <td>${alert.src_ip || 'N/A'}</td>
+                                    <td>${alert.dest_ip || 'N/A'}</td>
+                                    <td>${alert.protocol || 'N/A'}</td>
+                                    <td>${alert.type || 'N/A'}</td>
+                                    <td>${alert.message || 'N/A'}</td>
+                                </tr>
+                            `;
+                            alertsBody.innerHTML += row; // Append new alert rows
+                        });
+                    } else {
+                        alertsBody.innerHTML = '<tr><td colspan="6">No alerts available.</td></tr>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching alerts:', error);
+                    const alertsBody = document.getElementById('alertsBody');
+                    alertsBody.innerHTML = '<tr><td colspan="6">Error fetching alerts.</td></tr>';
+                });
+        }
+    </script>
+</body>
+</html>

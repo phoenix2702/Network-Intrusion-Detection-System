@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+    --primary-bg: #1e1e2e; /* Dark Gray */
+    --secondary-bg: #252636; /* Slightly lighter gray for cards */
+    --primary-accent: #00bfa6; /* Vibrant Teal */
+    --secondary-accent: #007bff; /* Bright Blue */
+    --success-color: #28a745; /* Green for success */
+    --text-color-light: #ffffff; /* Light Text */
+    --text-color-muted: #b0b3b8; /* Muted Light Gray */
+    --border-color: #3a3b50; /* Light border color for contrast */
+    --hover-scale: scale(1.02); /* Standard hover effect */
+    --font-family: 'Inter', sans-serif;
+}
+
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--primary-bg);
+    color: var(--text-color-light);
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Content Container */
+.content-container {
+    background: rgb(1, 1, 44);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content-container:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+    transform: var(--hover-scale);
+}
+
+/* Heading */
+.content-container h5 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-accent);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Button Styling */
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-accent);
+    color: var(--text-color-light);
+    box-shadow: 0 4px 10px rgba(0, 191, 166, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: #26d9c3;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 191, 166, 0.6);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: var(--text-color-light);
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+}
+
+.btn-success:hover {
+    background-color: #34d058;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.6);
+}
+
+/* Table Styling */
+.alert-table {
+    width: 100%;
+    margin-top: 1.5rem;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+.alert-table thead th {
+    background: var(--primary-accent);
+    color: var(--text-color-light);
+    font-weight: 600;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--secondary-bg);
+    border-top: 2px solid #009688;
+    font-size: 1rem;
+}
+
+.alert-table tbody tr {
+    background-color: var(--secondary-bg);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.alert-table tbody tr:hover {
+    background-color: var(--secondary-accent);
+    transform: var(--hover-scale);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.alert-table td {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-color-muted);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+}
+
+/* Alerts Text */
+#alerts-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--primary-accent);
+    margin-top: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .content-container {
+        max-width: 95%;
+    }
+
+    button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .alert-table thead th {
+        font-size: 0.85rem;
+    }
+
+    .alert-table td {
+        font-size: 0.8rem;
+    }
+}

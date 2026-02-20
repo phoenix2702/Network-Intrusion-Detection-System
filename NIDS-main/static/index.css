@@ -1,0 +1,172 @@
+/* Color Palette: Black and Blue with Persian Blue */
+:root {
+    --primary-color: #1a1a1af9; /* Charcoal Black */
+    --secondary-color: #0d6dfd98; /* Bright Blue */
+    --accent-color: #0056b3; /* Dark Blue */
+    --persian-blue: #311cbb; /* Persian Blue */
+    --text-color: #ffffff; /* White */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #1e293b;
+    background-attachment: fixed;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centered content styling */
+h1 {
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* InstaGuard text */
+.card-slider {
+    position: relative;
+    overflow: hidden; /* Hide overflow */
+    margin-left: 15pc;
+    margin-right: 10pc; /* Center the slider */
+}
+
+.card-container {
+    display: flex; /* Flexbox for horizontal layout */
+    transition: transform 0.5s ease; /* Smooth transition */
+    width: 100pc;
+    margin-top: 2pc;
+    animation: slideIn 1s ease-out; /* Slider animation */
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    width: 69pc; /* Minimum width for cards */
+    margin: 10px; /* Space between cards */
+    flex: 0 0 auto; /* Prevent shrinking */
+    background: #0d0d0f; /* Card background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Card shadow */
+    height: 25pc;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Enlarge slightly */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+}
+
+.card-slider-background {
+    background-color: #020417; /* Black background for card slider */
+    padding: 20px 0; /* Add some padding to the top and bottom */
+    margin-top: 5pc;
+}
+
+/* Button styles */
+#prevBtn, #nextBtn {
+    position: absolute; /* Position buttons absolutely */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical alignment */
+    z-index: 10; /* Ensure buttons are above other content */
+    background-color: rgba(0, 0, 0, 0.5); /* Background for buttons */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding for buttons */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+#prevBtn:hover, #nextBtn:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
+    transform: scale(1.1); /* Slight zoom */
+}
+
+#prevBtn {
+    left: 10px; /* Position left */
+    animation: fadeInLeft 1s ease-out; /* Fade in animation */
+}
+
+#nextBtn {
+    right: 10px; /* Position right */
+    animation: fadeInRight 1s ease-out; /* Fade in animation */
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.card-text {
+    font-size: x-large;
+    opacity: 0;
+    animation: fadeInText 1s ease forwards; /* Text fade-in animation */
+    animation-delay: 0.5s;
+}
+
+.card-title {
+    font-size: xx-large;
+    opacity: 0;
+    animation: fadeInText 1s ease forwards; /* Text fade-in animation */
+    animation-delay: 0.7s;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Add spacing and alignment for icons */
+.card i {
+    font-size: 3rem; /* Icon size */
+    color: var(--secondary-color); /* Icon color */
+    margin-bottom: 1rem; /* Spacing below the icon */
+    transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.card:hover i {
+    transform: rotate(20deg) scale(1.1); /* Rotate and scale on hover */
+}
+
+/* Style for navigation buttons */
+#prevBtn i, #nextBtn i {
+    font-size: 1.5rem; /* Icon size for buttons */
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+#prevBtn:hover i, #nextBtn:hover i {
+    transform: scale(1.2); /* Slight zoom on hover */
+}
